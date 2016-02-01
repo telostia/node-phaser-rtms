@@ -16,20 +16,23 @@ This is a code example pulled and modified from an existing game that I'm buildi
 * MongoDB
 * Phaser
 
-## Server environment
+## Installation
 1. Clone the repository, cd to it, and update node modules:
 > npm update
+
 2. Optionally change settings in index.js such as:
   * Server name and port (default local.host:4004)
   * Database connection string and collection names
       * By default, the database is configured with two collections:
-        * _authentications_ - for storing OAuth profiles
-        * _players_ - for storing your players
+        * *authentications* - for storing OAuth profiles
+        * *players* - for storing your players
   * Google Play ClientID and Client Secret
   * More authentication modules such as Facebook and Twitter
   * Whitelisted email addresses (e.g., your beta testers)
+
 3. Create and start a MongoDB instance, e.g.:
 > mongod --dbpath /path/to/data
+
 4. Start the server:
 > node index.js
 
@@ -38,40 +41,45 @@ This is a code example pulled and modified from an existing game that I'm buildi
 2. If not authenticated, you will be redirected to login.html until authentication.
 3. If authenticated, index.html loads and begins the connection handshake process.
 4. Upon completion of handshake, the client instantiates Phaser. Phaser will then execute a series of game states:
-  1. _boot_ - initial low-level screen formatting
-  2. _preloader_ - load all your graphics, sound files, spritesheets, etc.
-  3. _authenticator_ - insert or retrieve-and-update the player's authentication profile
-  4. _prestarter_ - create the player and data elements, finish the connection process, and trigger the main menu
-  5. _mainmenu_ - the final stage of startup, from here you can create your main menu and other game states
+  1. *boot* - initial low-level screen formatting
+  2. *preloader* - load all your graphics, sound files, spritesheets, etc.
+  3. *authenticator* - insert or retrieve-and-update the player's authentication profile
+  4. *prestarter* - create the player and data elements, finish the connection process, and trigger the main menu
+  5. *mainmenu* - the final stage of startup, from here you can create your main menu and other game states
 
 ## Components and what they do
 * Important files
-  * _index.js_ - main node server app
-  * _game.server.js_ - core server functions for client communication
-  * _www/game.client.js_ - core client functions for server communication
-  * _www/index.html_ - browser index page / game entry point
-  * _www/lib/*.js_ - library code such as Phaser and jQuery
-  * _www/src/*.js_ - your JavaScript game code
+  * *index.js* - main node server app
+  * *game.server.js* - core server functions for client communication
+  * *www/game.client.js* - core client functions for server communication
+  * *www/index.html* - browser index page / game entry point
+  * *www/lib/*.js* - library code such as Phaser and jQuery
+  * *www/src/*.js* - your JavaScript game code
 * Node modules
-  * _express_ - web server
-  * _express-session_ - session management for express (required by OAuth)
-  * _helmet_ - security for express
-  * _jade_ - template language for web pages
-  * _mongodb_ - node.js driver for MongoDB
-  * _mongojs_ - the mongo API
-  * _mongoose_ - MongoDB ODM
-  * _node-uuid_ - unique ID generator
-  * _passport_ - OAuth authentication
-  * _passport-google_ - Google API for passport
-  * _passport-google-oauth_ - Google OAuth strategies for passport
-  * _socket.io_ - real-time socket connections
-  * _node-gameloop_ - server game loop
+  * *express* - web server
+  * *express-session* - session management for express (required by OAuth)
+  * *helmet* - security for express
+  * *jade* - template language for web pages
+  * *mongodb* - node.js driver for MongoDB
+  * *mongojs* - the mongo API
+  * *mongoose* - MongoDB ODM
+  * *node-uuid* - unique ID generator
+  * *passport* - OAuth authentication
+  * *passport-google* - Google API for passport
+  * *passport-google-oauth* - Google OAuth strategies for passport
+  * *socket.io* - real-time socket connections
+  * *node-gameloop* - server game loop
 
 ## Why?
 I made this to showcase my JavaScript and Node.js code for potential employers, and because I hope this example will help other independent or professional game developers.
 
-## Who am I?
+## Contact
+Author: Jeffrey "pheryx" Milling
+E-mail: pheryx@gmail.com
+Homepage: http://www.jeffreymilling.com
 
 ## Credits
-
+These tutorials served as inspiration for helping me understand the Node.js environment:
+* [Real Time Multiplayer in HTML5](http://buildnewgames.com/real-time-multiplayer/)
+* [Building Multiplayer Games with Node.js and Socket.IO](http://modernweb.com/2013/09/30/building-multiplayer-games-with-node-js-and-socket-io/)
 

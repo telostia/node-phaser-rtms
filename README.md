@@ -18,6 +18,7 @@ This is a code example pulled and modified from an existing game that I'm buildi
 
 ## Installation (server environment)
 Clone the repository, cd to it, and update node modules:
+
     $ npm update
 
 Optionally change settings in **index.js** such as:
@@ -31,9 +32,11 @@ Optionally change settings in **index.js** such as:
   * Whitelisted email addresses (e.g., your beta testers)
 
 Create and start a MongoDB instance, e.g.:
+
     $ mongod --dbpath /path/to/data
 
 Start the server:
+
     $ node index.js
 
 ## Usage (client environment)
@@ -75,8 +78,8 @@ I made this to showcase my JavaScript and Node.js code for potential employers, 
 
 ## Contact
 Author: Jeffrey "pheryx" Milling
-E-mail: pheryx@gmail.com
-Homepage: http://www.jeffreymilling.com
+E-mail: <pheryx@gmail.com>
+Homepage: <http://www.jeffreymilling.com>
 
 ## Credits
 These tutorials served as inspiration for helping me understand the Node.js environment:

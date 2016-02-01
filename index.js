@@ -74,10 +74,8 @@ app.get('/logout', function (req, res) {
 
 // create the Google passport strategy
 passport.use(new GoogleStrategy({
-		//clientID: 'YOUR_CLIENT_ID',
-		//clientSecret: 'YOUR_CLIENT_SECRET',
-		clientID: '717273953075-ct867cbdg9vhhhq8rf0i4jrcd3mp8qqb.apps.googleusercontent.com',
-		clientSecret: '-c0DnwaJTLYCaGuWbcx2sJjl',
+		clientID: 'YOUR_CLIENT_ID',
+		clientSecret: 'YOUR_CLIENT_SECRET',
 		callbackURL: 'http://local.host:4004/auth/google/callback'
 	},
 	function (accessToken, refreshToken, profile, callback) {

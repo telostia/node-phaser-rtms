@@ -1,8 +1,4 @@
-# node-phaser-rtms
-
-Node.js Phaser.io Real-time Multiplayer Server Example
-
-## Summary
+# Node.js Phaser.io Real-time Multiplayer Server Example
 
 This is an example of an HTML5 multiplayer game framework. It consists of a server environment running [Node.js](https://nodejs.org), [Express](http://expressjs.com), and [socket.io](http://socket.io), with a [MongoDB](http://www.mongodb.com) database, using [Phaser](http://phaser.io) as the game engine.
 
@@ -87,7 +83,9 @@ I made this to showcase my JavaScript and Node.js code for potential employers, 
 ## Contact
 
 Author: Jeffrey "pheryx" Milling
+
 E-mail: <pheryx@gmail.com>
+
 Homepage: <http://www.jeffreymilling.com>
 
 ## Credits

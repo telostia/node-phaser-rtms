@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8">
+		<title>Node.js Phaser.io Real-time Multiplayer Server Example</title>
+		<link href="index.css" media="screen" rel="stylesheet" type="text/css">
+		 	<!-- socket.io client side contents -->
+		<script src="/socket.io/socket.io.js"></script>
+		 	<!-- core client functions for server communication -->
+		<script src="game.core.js"></script>
+			<!-- a custom state manager class -->
+		<script type="text/javascript" src="lib/origState.js"></script>
+			<!-- library code -->
+		<script type="text/javascript" src="lib/Objectid.js"></script>
+		<script type="text/javascript" src="lib/phaser.min.js"></script>
+			<!-- game state managers -->
+		<script type="text/javascript" src="src/Screen.Boot.js"></script>
+		<script type="text/javascript" src="src/Screen.Preloader.js"></script>
+		<script type="text/javascript" src="src/Screen.Authenticator.js"></script>
+		<script type="text/javascript" src="src/Screen.Prestarter.js"></script>
+		<script type="text/javascript" src="src/Screen.MainMenu.js"></script>
+			<!-- helper game code -->
+		<script type="text/javascript" src="src/Schema.js"></script>
+		<script type="text/javascript" src="src/Specs.js"></script>
+			<!-- core game code -->
+		<script type="text/javascript" src="src/Player.js"></script>
+			<!-- core graphics code (HUD, GUI, etc.) -->
+			<!-- the main client initializer -->
+		<script type="text/javascript" src="game.client.js"></script>
+	</head>
+	<body>
+
+<div id="game-canvas-container">
+<div id="game-canvas"></div>
+</div>
+
+<script type="text/javascript">
+	window.onload = function(){
+		var winW = this.width;
+		var winH = this.height;
+
+		myGame = new Phaser.Game(winW, winH, Phaser.CANVAS, 'game-canvas',
+			{ create: socketClientSetup, update: update });
+		myGame.state.add('boot', Screen.Boot);
+		myGame.state.add('preloader', Screen.Preloader);
+		myGame.state.add('authenticator', Screen.Authenticator);
+		myGame.state.add('prestarter', Screen.Prestarter);
+		myGame.state.add('mainmenu', Screen.MainMenu);
+		gameDiv = document.getElementById('game-canvas');
+	};
+</script>
+
+	</body>
+</html>

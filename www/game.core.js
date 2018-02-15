@@ -76,14 +76,14 @@ game_core.prototype.client_connect_to_server = function() {
 };
 
 game_core.prototype.client_onconnected = function(data) {
-	//console.log(data);
+	console.log(data);
 
 	this.player.profile = data.profile;
 	this.player.state = 'connected';
 	this.player.online = true;
-
+	console.log('this.player.online: '+this.player.online);
 	gameCoreActive = true;
-	//console.log(this.player.profile);
+	console.log('_________'+this.player.profile);
 };
 
 game_core.prototype.client_ondisconnect = function(data) {
@@ -92,18 +92,19 @@ game_core.prototype.client_ondisconnect = function(data) {
 };
 
 game_core.prototype.client_dbResult = function(data) {
-	//console.log('core.dbResult');
+	console.log('__core.dbResult');
 
 	switch (data.dbid) {
 
 		case 'authenticationsFind':
-			//console.log(data.dbResult[0]);
+			console.log('authenticationsFind: ');
+			console.log(data.dbResult[0]);
 			player.dataStore.authentication = data.dbResult[0];
 		break;
 
 		case 'decksFind':
 			player.dataStore.decks = data.dbResult;
-			//console.log(player.dataStore.decks);
+			console.log(player.dataStore.decks);
 			if (playerState.gameState == 'Prestarter') {
 				ScreenPrestarter.poststarter();
 			}

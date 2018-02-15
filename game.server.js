@@ -17,7 +17,7 @@ var nowTime = Math.round(nowMuTime / 1000);
 /**
  * playerConnect is called by index.js to connect the player and initialize a new game instance.
  *
- * @param sdb The MondoDB connection
+ * @param sdb The MongoDB connection
  * @param sio The Socket.IO library
  * @param socket The socket object for the connected client
  * @param sUUID The node-uuid library

@@ -15,7 +15,7 @@ var	gameport	= process.env.PORT || 4004,
 	verbose		= false,
 	http		= require('http'),
 	GoogleProfile	= {},
-	databaseURI	= 'local.host:27017/MyGameDB',
+	databaseURI	= 'localhost:27017/FreeSpirits',
 	collections	= [
 		'authentications',
 		'players',
@@ -23,8 +23,14 @@ var	gameport	= process.env.PORT || 4004,
 	];
 ;
 
+var cookieParser = require('cookie-parser'),
+	bodyParser = require('body-parser'),
+	methodOverride = require('method-override');
+
 // connect to the db
-var db = require('mongojs').connect(databaseURI, collections);
+var mongojs = require('mongojs');
+var db = mongojs(databaseURI, collections)
+//var db = require('mongojs').connect(databaseURI, collections);
 
 // Import the 'path' module (packaged with Node.js)
 //var path = require('path');
@@ -33,21 +39,20 @@ var db = require('mongojs').connect(databaseURI, collections);
 var app = express();
 
 // Create a simple Express application
-app.configure(function() {
 	// Turn down the logging activity
 	//app.use(express.logger('dev'));
 
-	app.use(express.cookieParser());
-	app.use(express.bodyParser());
-	app.use(express.session({secret:'changeme'})); // change your session secret
+	app.use(cookieParser());
+	app.use(bodyParser());
+	app.use(session({secret:'changeme'})); // change your session secret
 	app.use(passport.initialize());
 	app.use(passport.session());
-	app.use(express.methodOverride());
-	app.use(app.router);
+	app.use(methodOverride());
+	//app.use(app.router);
 
 	// Serve static html, js, css, and image files from the 'www' directory
 	app.use(express.static(path.join(__dirname,'www')));
-});
+
 
 // routes for google auth and the callback
 app.get('/auth/google', passport.authenticate('google',{scope: 'https://www.googleapis.com/auth/plus.login email'}));
@@ -58,13 +63,26 @@ app.get('/auth/google/callback',
 	})
 );
 
+
+/*
+app.get('/auth/google', passport.authenticate('google', { scope: ['email profile'] }));
+app.get('/auth/google/callback',
+  passport.authenticate('google', {
+    failureRedirect: '/login'
+  }),
+  function(req, res) {
+    // Authenticated successfully
+    res.redirect('/');
+  });
+*/
+
 // routes for login, deny, and logout
 app.get('/login', function (req, res) {
-	res.sendfile('login.html', { root: __dirname + '/www' });
+	res.sendFile('login.html', { root: __dirname + '/www' });
 });
 
 app.get('/deny', function (req, res) {
-	res.sendfile('deny.html', { root: __dirname + '/www' });
+	res.sendFile('deny.html', { root: __dirname + '/www' });
 });
 
 app.get('/logout', function (req, res) {
@@ -74,9 +92,9 @@ app.get('/logout', function (req, res) {
 
 // create the Google passport strategy
 passport.use(new GoogleStrategy({
-		clientID: 'YOUR_CLIENT_ID',
-		clientSecret: 'YOUR_CLIENT_SECRET',
-		callbackURL: 'http://local.host:4004/auth/google/callback'
+		clientID: 'CLIENT_ID',
+		clientSecret: 'CLIENT_SECRET',
+		callbackURL: 'http://localhost:4004/auth/google/callback'
 	},
 	function (accessToken, refreshToken, profile, callback) {
 		callback(null, profile);
@@ -112,9 +130,9 @@ app.get( '/', ensureAuthenticated, function( req, res ){
 
 	// check for whitelisted email
 	if (approvedEmails.indexOf(profileEmail) < 0)
-		res.sendfile( 'deny.html' , { root: __dirname + '/www' });
+		res.sendFile( 'deny.html' , { root: __dirname + '/www' });
 	else
-		res.sendfile( 'index.html' , { root: __dirname + '/www' });
+		res.sendFile( 'index.html' , { root: __dirname + '/www' });
 });
 
 // wildcard for all other root files like css and images
@@ -124,7 +142,7 @@ app.get( '/*' , function( req, res, next ) {
 
 	if(verbose) console.log('\t :: Express :: file requested : ' + file);
 
-	res.sendfile( __dirname + '/www/' + file );
+	res.sendFile( __dirname + '/www/' + file );
 
 });
 

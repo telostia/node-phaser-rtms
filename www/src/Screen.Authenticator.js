@@ -18,18 +18,18 @@ Screen.Authenticator.prototype.preload = function() {
 };
 
 Screen.Authenticator.prototype.create = function() {
-	//console.log('authenticator.create');
+	console.log('authenticator.create');
 	playerState.gameState = 'Authenticator';
 	this.initDataCreate();
 };
 
 Screen.Authenticator.prototype.poststarter = function() {
-	//console.log('authenticator.poststarter');
+	console.log('authenticator.poststarter');
 	this.game.state.start('preloader');
 };
 
 Screen.Authenticator.prototype.initDataCreate = function() {
-	//console.log('authenticator.initDataCreate');
+	console.log('authenticator.initDataCreate');
 
 	var profile = gameCore.player.profile;
 
@@ -38,6 +38,7 @@ Screen.Authenticator.prototype.initDataCreate = function() {
 	schema.docUpdate('authentications', authCrit, authDoc);
 
 	var providerKey = profile.provider + 'Id';
+	console.log(' ____ '+ providerKey);
 	var playerCrit = { profileEmail: profile.emails[0].value };
 	var playerDoc = {
 		provider: profile.provider,
